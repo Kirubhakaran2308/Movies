@@ -1,0 +1,32 @@
+PRAGMA foreign_keys = 0;
+
+CREATE TABLE sqlitestudio_temp_table AS SELECT *
+                                          FROM Movies_info;
+
+DROP TABLE Movies_info;
+
+CREATE TABLE Movies_info (
+    Movie_name      TEXT    NOT NULL,
+    Actor_name      TEXT    NOT NULL,
+    Actress_name    TEXT    NOT NULL,
+    Director_name   TEXT    NOT NULL,
+    Year_of_release INTEGER NOT NULL
+);
+
+INSERT INTO Movies_info (
+                            Movie_name,
+                            Actor_name,
+                            Actress_name,
+                            Director_name,
+                            Year_of_release
+                        )
+                        SELECT Movie_name,
+                               Actor_name,
+                               Actress_name,
+                               Director_name,
+                               Year_of_release
+                          FROM sqlitestudio_temp_table;
+
+DROP TABLE sqlitestudio_temp_table;
+
+PRAGMA foreign_keys = 1;
